@@ -1,0 +1,21 @@
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore IDE/editor folders
+.vscode/
+.idea/
+
+# Ignore node modules
+node_modules/
+
+# Ignore build output
+dist/
+build/
