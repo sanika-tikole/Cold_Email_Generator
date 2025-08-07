@@ -19,3 +19,13 @@ node_modules/
 # Ignore build output
 dist/
 build/
+
+# Vector store
+vectorstore/
+*.faiss
+*.pkl
+*.json
+
+# Python cache
+__pycache__/
+*.pyc
