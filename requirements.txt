@@ -5,3 +5,4 @@
  pandas
  chromadb
  langchain-community
+ streamlit
