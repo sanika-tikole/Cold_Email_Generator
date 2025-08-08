@@ -29,20 +29,6 @@ It uses **LangChain**, **Groq’s Llama 3-70B model**, and **Streamlit** to:
 
 ---
 
-## 📂 Project Structure
- 📦 cold-email-generator
-├── app/
-│ ├── resource/
-│ │ └── my_portfolio.csv # Your portfolio links and tech stacks
-│ ├── chains.py # LLM chain logic for job extraction & email writing
-│ ├── portfolio.py # Portfolio management and vector DB
-│ ├── utils.py # Helper functions for cleaning text
-│ └── streamlit_app.py # Main Streamlit app
-├── .env # Your API keys (not committed to GitHub)
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
-
----
 ## 📋 Setup Instructions
 
 ### 1️⃣ Clone the Repository
@@ -53,7 +39,9 @@ cd cold-email-generator
 ---
 
 ###  Run the Streamlit App
+```bash
 streamlit run app/streamlit_app.py
+```
 
 ---
 
