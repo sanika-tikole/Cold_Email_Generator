@@ -50,3 +50,6 @@ LINK:-https://cold-email-generator-lvu9.onrender.com
 
 ---
 ### Screenshot
+<img width="2370" height="1273" alt="image" src="https://github.com/user-attachments/assets/8cc8916f-a068-4500-819d-6c26a421b141" />
+<img width="2328" height="1110" alt="image" src="https://github.com/user-attachments/assets/63cbcf8c-35a5-40ef-9a55-a5a2b1019bca" />
+
