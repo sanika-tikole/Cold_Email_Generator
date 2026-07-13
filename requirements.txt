@@ -2,8 +2,7 @@
  langchain-core 
  langchain-groq 
  python-dotenv
+ requests
  pandas
  chromadb
- langchain-community
  streamlit
- beautifulsoup4

@@ -1,8 +1,19 @@
 import streamlit as st
+import requests
 from chains import Chain
 from portfolio import Portfolio
 from utils import clean_text
-from langchain_community.document_loaders import WebBaseLoader
+
+
+def load_page_text(url):
+    response = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+    response.raise_for_status()
+    text = clean_text(response.text)
+
+    if "404 this page could not be found" in text.lower():
+        raise ValueError("The page returned a generic 404 shell instead of the actual job description.")
+
+    return text
 
 def create_streamlit_app(chain, portfolio, clean_text):
     st.title("Cold Mail Generator")
@@ -14,25 +25,25 @@ def create_streamlit_app(chain, portfolio, clean_text):
     if submit_button:
         try:
             # Load content from the URL
-            loader = WebBaseLoader([url_input])
-            data = clean_text(loader.load().pop().page_content)
+            data = load_page_text(url_input)
 
             # Load and process portfolio
             portfolio.load_portfolio()
 
             # Extract job listings from cleaned data
-            jobs = chain.extract_jobs(data)
+            job = chain.extract_jobs(data)
+            if isinstance(job, list):
+                job = job[0] if job else {}
 
-            for job in jobs:
-                skills = job.get('skills', [])
-                links = portfolio.query_links(skills)
+            skills = job.get('skills', [])
+            links = portfolio.query_links(skills)
 
-                # Generate cold mail
-                email = chain.write_mail(job, links)
+            # Generate cold mail
+            email = chain.write_mail(job, links)
 
-                # Display the generated email
-                st.subheader(f"Email for: {job.get('role', 'Unknown Role')}")
-                st.code(email, language='markdown')
+            # Display the generated email
+            st.subheader(f"Email for: {job.get('role', 'Unknown Role')}")
+            st.code(email, language='markdown')
 
         except Exception as e:
             st.error(f"An error occurred: {e}")

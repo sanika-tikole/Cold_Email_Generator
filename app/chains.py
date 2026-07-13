@@ -30,9 +30,9 @@ class Chain:
 
             The scraped text is from the career's page of a website.
 
-            Your job is to extract the job postings and return them in JSON format containing the following keys: 'role', 'experience', 'skills' and 'description'.
+            Your job is to extract only the single most relevant job posting and return it in JSON format containing the following keys: 'role', 'experience', 'skills' and 'description'.
 
-            Only return the valid JSON in dict format.
+            Only return one valid JSON object in dict format.
 
             ### VALID JSON (NO PREAMBLE):
             """
@@ -46,7 +46,7 @@ class Chain:
             res = json_parser.parse(res.content)
         except OutputParserException:
             raise OutputParserException("Context too big, unable to parse jobs")
-        return res if isinstance(res, list) else [res]
+        return res
 
     def write_mail(self, job, links):
         prompt_email = PromptTemplate.from_template(
@@ -61,6 +61,9 @@ class Chain:
             Over our experience, we have empowered numerous enterprises with tailored solutions, fostering process optimization, cost reduction, and heightened overall efficiency.
 
             Your job is to write a cold email to the client regarding the job mentioned above and pitch how AtliQ can assist in fulfilling their needs.
+
+            Use the actual role, skills, and description from the job posting as the source of truth.
+            Keep the email aligned with that role and do not invent a different job title or skill set.
 
             Also add the most relevant ones from the following links to showcase AtliQ's portfolio.
 
