@@ -11,7 +11,7 @@ load_dotenv()  # Load environment variables from .env file
 class Chain:
     def __init__(self):
         self.llm = ChatGroq(
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             api_key=os.getenv("API_KEY"),  # Use environment variable for safety
             temperature=0,
             max_tokens=None,
